@@ -1,38 +1,83 @@
-.App {
-  text-align: center;
+@import '~stream-chat-react/dist/css/v2/index.css';
+
+.nav-bar-container {
+    width: 100vw;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    background-color: #18181B;
+    height: 5.0rem;
+}
+.main-page-container {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    position: fixed;
+}
+.enter-stream-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.75rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.enter-stream-button {
+    background-color: mediumpurple;
+    margin-right: 1.0rem;
+    border-radius: 8px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.enter-stream-button:hover {
+    background-color: mediumpurple;
+    cursor: pointer;
+}
+.submit-stream-button {
+    margin-top: 0.75rem;
+}
+.message-list-container {
+    height:80vh;
+}
+.chat-container {
+    width: 500px;
+}
+.stream-video {
+    width: 550px;
+    height: 750px;
+    margin-right: 250px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+
+.react-player-container {
+    height: 95vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+   justify-content: center;
+    align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.video-description-container {
+    background-color: #18181B;
+    padding-top: 1.0rem;
+    width: 1050px;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    height: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.streamer-details-container {
+    display: flex;
+    align-items: center;
+}
+.streamer-username {
+    font-weight: bold;
+}
+.stream-iframe {
+    aspect-ratio: 16/9;
+    object-fit: cover;
 }

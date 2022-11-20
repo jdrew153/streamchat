@@ -1,0 +1,18 @@
+.main-admin-page-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stream-preview {
+    margin-right: 1.0rem;
+}
+.placeholder-loading-container {
+    max-height: 750px;
+    max-width: 650px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

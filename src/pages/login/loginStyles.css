@@ -5,5 +5,28 @@
     align-items: center;
     justify-content: center;
 }
-
-
+header {
+    font-weight: bolder;
+}
+.login-form {
+    max-width: 50vw;
+    max-height: 45vh;
+    min-height: 350px;
+    min-width: 450px;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1.0rem;
+    flex-direction: column;
+    border: 0.50rem solid lightcoral;
+    border-radius: 0.75rem;
+    box-shadow: 0.75rem 0.5rem 1rem black;
+}
+.submit-button-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.submit-button {
+    background-color: lightcoral;
+    max-width: 150px;
+}

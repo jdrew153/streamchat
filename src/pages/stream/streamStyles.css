@@ -1,0 +1,16 @@
+.react-player-container {
+    box-shadow: 0.75rem 0.75rem 0.75rem grey;
+}
+
+.honey-moon-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 2rem;
+    border: 2px solid white;
+}
+
+.honey-moon-button {
+    background-color: mediumpurple;
+    padding: 0.5rem;
+}

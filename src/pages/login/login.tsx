@@ -4,7 +4,7 @@ import axios from "axios";
 import { UserContext} from "../../utils/context";
 import { useCookies } from 'react-cookie'
 import {useNavigate} from "react-router-dom";
-
+import './loginStyles.css'
 
 const Login:React.FC = () => {
 
@@ -35,12 +35,20 @@ const Login:React.FC = () => {
     return (
         <>
             <div className='main-login-page-container'>
-                <form>
+                <form className='login-form' onSubmit={async (e) => {
+                    e.preventDefault()
+                    const result:UserContext =  await handleLoginSubmit();
+                    console.log("login result --> ", result.role)
+                }}>
+                    <header>
+                        Admin User Login
+                    </header>
                     <div>
                         <TextInput
                             placeholder='Enter your email'
                             type='text'
                             onChange={(e) => setEmail(e.target.value)}
+                            autoComplete="off"
                         />
                     </div>
                     <div>
@@ -48,14 +56,14 @@ const Login:React.FC = () => {
                             placeholder='Enter your password'
                             type='password'
                             onChange={(e) => setPassword(e.target.value)}
+                            autoComplete='off'
                         />
                     </div>
-                    <Button onClick={async () => {
-                      const result:UserContext =  await handleLoginSubmit();
-                      console.log("login result --> ", result.role)
-                    }}>
-                        Submit
-                    </Button>
+                   <div className='submit-button-wrapper'>
+                       <Button className='submit-button' type='submit'>
+                           Submit
+                       </Button>
+                   </div>
                 </form>
             </div>
         </>

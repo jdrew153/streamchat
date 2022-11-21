@@ -14,7 +14,8 @@ interface donationStruct {
 }
 const DonationModal:React.FC = () => {
     /*@ts-ignore*/
-    const stripePromise = loadStripe(process.env.STRIPE_API_KEY);
+    const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY);
+    console.log(process.env.REACT_APP_STRIPE_API_KEY)
     const appearance:Appearance = {
         theme: "stripe",
         variables: {

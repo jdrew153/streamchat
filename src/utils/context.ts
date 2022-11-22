@@ -14,3 +14,11 @@ enum UserRoles {
     admin = "ADMIN",
     user = "USER"
 }
+
+
+export interface CheckoutStruct {
+    paymentType: string,
+    currency: string,
+    amount: string
+}
+

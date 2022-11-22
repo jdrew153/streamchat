@@ -8,27 +8,30 @@ import './componentStyles/checkoutFormStyles.css'
 import axios from "axios";
 import GoldCoin from '../goldbitcoin_1.svg';
 import {Avatar} from "@mantine/core";
+import { CheckoutStruct } from "../utils/context";
 
 
 const CheckoutForm:React.FC = () => {
     const stripe = useStripe();
     const elements = useElements();
-    const [donationSelected, setDonationSelected] = useState(false);
+    const [donationSelected, setDonationSelected] = useState(0);
     const [headToCheckout, setHeadToCheckout] = useState(false);
-    const [donationCode, setDonationCode] = useState<string | null>(null);
+    const [donationCode, setDonationCode] = useState<string>('');
+    const [paymentIntention, setPaymentIntention] = useState<CheckoutStruct | null>(null);
 
 
-    const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (!stripe || !elements) {
+
+    const handleSubmit = async () => {
+        if (!stripe || !elements || (paymentIntention === null)) {
             return;
         }
-
         //// TODO make the post request to the payment intent endpoint
         const response = await axios.post("http://localhost:8000/create-payment-intent", {
-            "amount": 10000
+            "paymentType": paymentIntention.paymentType,
+            "currency": paymentIntention.currency,
+            "amount": paymentIntention.amount
         })
-        console.log(response)
+        console.log('response',response)
     }
 
 
@@ -51,16 +54,37 @@ const CheckoutForm:React.FC = () => {
                ) : (
                    <>
                        <div className='donation-selection-container'>
-                           <div className="donation-box" onClick={() => {
-                               setDonationSelected(true);
-                               setDonationCode("un-->dollares")
+                           <div className={donationSelected === 1 ? ("selected-donation-box") : ('donation-box') } onClick={() => {
+                               setDonationSelected(1);
+                               setDonationCode("unDollares")
+                               if (donationCode.length > 2) {
+                                setPaymentIntention({
+                                    currency: 'usd',
+                                    paymentType: 'card',
+                                    amount: donationCode 
+                                
+                                })
+                              } else alert('no donation code set')
+                            console.log(paymentIntention)
                            }}>
                                <Avatar src={GoldCoin} radius='xl' className='coin-avatar'/>
                                <h5>
                                    $1.00
                                </h5>
                            </div>
-                           <div className={'donation-box'}>
+                           <div className={donationSelected === 2 ? ("selected-donation-box") : ('donation-box') } onClick={() => {
+                               setDonationSelected(2);
+                               setDonationCode("cincoDollares")
+                               if (donationCode.length > 2) {
+                                setPaymentIntention({
+                                    currency: 'usd',
+                                    paymentType: 'card',
+                                    amount: donationCode 
+                                
+                                })
+                              } else alert('no donation code set')
+                            console.log(paymentIntention)
+                           }}>
                                <Avatar.Group spacing='sm' className='coin-avatar'>
                                    <Avatar src={GoldCoin} radius='xl'/>
                                    <Avatar src={GoldCoin} radius='xl'/>
@@ -69,7 +93,19 @@ const CheckoutForm:React.FC = () => {
                                    $5.00
                                </h5>
                            </div>
-                           <div className='donation-box'>
+                           <div className={donationSelected === 3 ? ("selected-donation-box") : ('donation-box') } onClick={() => {
+                               setDonationSelected(3);
+                               setDonationCode("diazDollares")
+                              if (donationCode.length > 2) {
+                                setPaymentIntention({
+                                    currency: 'usd',
+                                    paymentType: 'card',
+                                    amount: donationCode 
+                                
+                                })
+                              } else alert('no donation code set')
+                            console.log(paymentIntention)
+                           }}>
                                <Avatar.Group spacing='sm' className='coin-avatar'>
                                    <Avatar src={GoldCoin} radius='xl'/>
                                    <Avatar src={GoldCoin} radius='xl'/>
@@ -79,7 +115,19 @@ const CheckoutForm:React.FC = () => {
                                    $10.00
                                </h5>
                            </div>
-                           <div className='donation-box'>
+                           <div className={donationSelected === 4 ? ("selected-donation-box") : ('donation-box') } onClick={() => {
+                               setDonationSelected(4);
+                               setDonationCode("manyDollares")
+                               if (donationCode.length > 2) {
+                                setPaymentIntention({
+                                    currency: 'usd',
+                                    paymentType: 'card',
+                                    amount: donationCode 
+                                
+                                })
+                              } else alert('no donation code set')
+                            console.log(paymentIntention)
+                           }}>
                                <Avatar.Group spacing='sm' className='coin-avatar'>
                                    <Avatar src={GoldCoin} radius='xl'/>
                                    <Avatar src={GoldCoin} radius='xl'/>
@@ -92,11 +140,18 @@ const CheckoutForm:React.FC = () => {
 
                            </div>
                        </div>
-                       { donationSelected &&
+                       { donationSelected !==0 &&
+                       
                            <div className='custom-message-container'>
+                            <h5>
+                                You selected {donationCode}
+                            </h5>
                                <label htmlFor='message-input'> Write a Message!</label>
                                <textarea id='message-input' placeholder='You guys are awesome!!'/>
-                               <Button className='checkout-button' onClick={() => {
+                               <Button className='checkout-button' onClick={async () => {
+                                   
+                                    const res = await handleSubmit();
+                                   console.log('submit response', res)
                                    setHeadToCheckout(true)
                                }}>
                                    Checkout

@@ -51,12 +51,21 @@ button {
 .donation-box:hover{
     cursor: pointer;
 }
+
 .coin-avatar:hover {
     filter: drop-shadow(0.75rem 0.10rem 2rem gold);
 }
 .selected-donation-box {
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.0rem;
+    margin: 0.5rem;
+    border-radius: 1.0rem;
+    box-shadow: 0.25rem 0.75rem 1.50rem  grey;
+    width: 135px;
 }
+
 .custom-message-container {
     margin-top: 1.0rem;
     display: flex;

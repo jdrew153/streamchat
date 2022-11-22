@@ -159,7 +159,7 @@ const Stream:React.FC = () => {
                            </div>
                         </div>
                     </div>
-                <Modal opened={showDonationModal} onClose={() => setShowDonationModal(false)} size='lg'>
+                <Modal title="" opened={showDonationModal} onClose={() => setShowDonationModal(false)} size='lg'>
                     <Donation/>
                 </Modal>
                 {client && channel &&

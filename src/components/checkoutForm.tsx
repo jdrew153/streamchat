@@ -14,7 +14,9 @@ const CheckoutForm:React.FC = () => {
     const stripe = useStripe();
     const elements = useElements();
     const [donationSelected, setDonationSelected] = useState(false);
-    const [customDonation, setCustomDonation] = useState<string | null>(null);
+    const [headToCheckout, setHeadToCheckout] = useState(false);
+    const [donationCode, setDonationCode] = useState<string | null>(null);
+
 
     const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -34,7 +36,7 @@ const CheckoutForm:React.FC = () => {
         <>
            <div className='checkout-form-container'>
 
-               { donationSelected ? (
+               { headToCheckout ? (
                    <form id="checkout-form" onSubmit={handleSubmit}>
                        <div>
                            <label htmlFor="card-element" > Card Number </label>
@@ -49,42 +51,59 @@ const CheckoutForm:React.FC = () => {
                ) : (
                    <>
                        <div className='donation-selection-container'>
-                           <div className='donation-box'>
-                               <Avatar src={GoldCoin} radius='xl'/>
+                           <div className="donation-box" onClick={() => {
+                               setDonationSelected(true);
+                               setDonationCode("un-->dollares")
+                           }}>
+                               <Avatar src={GoldCoin} radius='xl' className='coin-avatar'/>
                                <h5>
-                                   1.00
+                                   $1.00
                                </h5>
                            </div>
-                           <div className='donation-box'>
-                               <Avatar.Group spacing='sm'>
+                           <div className={'donation-box'}>
+                               <Avatar.Group spacing='sm' className='coin-avatar'>
                                    <Avatar src={GoldCoin} radius='xl'/>
                                    <Avatar src={GoldCoin} radius='xl'/>
                                </Avatar.Group>
                                <h5>
-                                   5.00
+                                   $5.00
                                </h5>
                            </div>
                            <div className='donation-box'>
-                               <Avatar.Group spacing='sm'>
+                               <Avatar.Group spacing='sm' className='coin-avatar'>
                                    <Avatar src={GoldCoin} radius='xl'/>
                                    <Avatar src={GoldCoin} radius='xl'/>
                                    <Avatar src={GoldCoin} radius='xl'/>
                                </Avatar.Group>
                                <h5>
-                                   10.00
+                                   $10.00
                                </h5>
                            </div>
                            <div className='donation-box'>
+                               <Avatar.Group spacing='sm' className='coin-avatar'>
+                                   <Avatar src={GoldCoin} radius='xl'/>
+                                   <Avatar src={GoldCoin} radius='xl'/>
+                                   <Avatar src={GoldCoin} radius='xl'/>
+                                   <Avatar src={GoldCoin} radius='xl'/>
+                               </Avatar.Group>
                                <h5>
-                                   Custom Amount?
+                                  $20.00
                                </h5>
 
                            </div>
                        </div>
-                       <div className='custom-message-container'>
-                           <label htmlFor='message-input'> Write a Message!</label>
-                           <textarea id='message-input'/>
-                       </div>
+                       { donationSelected &&
+                           <div className='custom-message-container'>
+                               <label htmlFor='message-input'> Write a Message!</label>
+                               <textarea id='message-input' placeholder='You guys are awesome!!'/>
+                               <Button className='checkout-button' onClick={() => {
+                                   setHeadToCheckout(true)
+                               }}>
+                                   Checkout
+                               </Button>
+                           </div>
+
+                       }
                    </>
                )
 
